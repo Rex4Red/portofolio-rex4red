@@ -9,6 +9,8 @@ interface CloudinaryUploadProps {
   hint?: string;
   folder?: string;
   accept?: string;
+  /** Reserved for future preview aspect-ratio control. Currently accepted but unused. */
+  aspectRatio?: number;
 }
 
 export function CloudinaryUpload({
