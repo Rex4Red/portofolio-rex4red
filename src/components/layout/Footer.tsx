@@ -1,6 +1,6 @@
 "use client";
 
-import { getProfile, getVisitorCount, Profile } from "@/lib/data";
+import { getProfile, getVisitorCount, incrementVisitorCount, Profile } from "@/lib/data";
 import { useEffect, useState } from "react";
 
 export function Footer() {
@@ -9,7 +9,28 @@ export function Footer() {
 
   useEffect(() => {
     getProfile().then(setProfile);
-    getVisitorCount().then(setVisitors);
+
+    // Increment visitor counter once per browser session
+    async function bumpAndFetch() {
+      try {
+        const alreadyCounted =
+          typeof window !== "undefined" &&
+          sessionStorage.getItem("visitor_counted") === "1";
+
+        if (!alreadyCounted) {
+          await incrementVisitorCount();
+          if (typeof window !== "undefined") {
+            sessionStorage.setItem("visitor_counted", "1");
+          }
+        }
+      } catch (err) {
+        // Don't break the page if increment fails (e.g. rules / network)
+        console.warn("visitor increment skipped:", err);
+      } finally {
+        getVisitorCount().then(setVisitors);
+      }
+    }
+    bumpAndFetch();
   }, []);
 
   if (!profile) return null;
