@@ -69,33 +69,33 @@ export function ExperienceSection() {
                     <span className="font-[family-name:var(--font-code)] text-sm text-text-muted">{exp.startDate.split("-")[0]}</span>
                   </div>
                   <div className="relative shrink-0 mt-1.5"><div className="timeline-dot" /></div>
-                  <div className="flex-1 pb-2">
+                  <div className="flex-1 min-w-0 pb-2">
                     <span className="md:hidden font-[family-name:var(--font-code)] text-xs text-text-muted mb-1 block">{exp.startDate.split("-")[0]}</span>
                     <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <h3 className="font-[family-name:var(--font-display)] text-lg md:text-xl text-text-primary">{exp.position}</h3>
+                      <h3 className="font-[family-name:var(--font-display)] text-lg md:text-xl text-text-primary break-words">{exp.position}</h3>
                       <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border capitalize ${typeClr[exp.type] || ""}`}>{exp.type}</span>
                     </div>
-                    <p className="font-[family-name:var(--font-body)] text-sm font-semibold text-primary mb-1">{exp.organization}</p>
+                    <p className="font-[family-name:var(--font-body)] text-sm font-semibold text-primary mb-1 break-words">{exp.organization}</p>
                     <p className="font-[family-name:var(--font-code)] text-xs text-text-muted mb-3">{fmtDate(exp.startDate)} — {exp.endDate ? fmtDate(exp.endDate) : "Sekarang"}</p>
-                    <p className="font-[family-name:var(--font-body)] text-sm text-text-secondary leading-relaxed">{exp.description}</p>
+                    <p className="font-[family-name:var(--font-body)] text-sm text-text-secondary leading-relaxed break-words">{exp.description}</p>
 
                     {/* Certificate Display */}
                     {exp.certificateUrl && (
                       <div className="mt-4">
                         <div
-                          className="group/cert cursor-pointer flex items-center gap-4 bg-surface-elevated border border-border rounded-xl p-3 hover:border-accent/40 transition-all duration-300 max-w-sm"
+                          className="group/cert cursor-pointer flex items-center gap-3 sm:gap-4 bg-surface-elevated border border-border rounded-xl p-3 hover:border-accent/40 transition-all duration-300 w-full sm:max-w-sm"
                           onClick={() => setViewCert(certPreview(exp.certificateUrl!))}
                         >
-                          <div className="w-24 h-[68px] rounded-lg overflow-hidden shrink-0 border border-border/50 bg-white">
+                          <div className="w-20 h-[56px] sm:w-24 sm:h-[68px] rounded-lg overflow-hidden shrink-0 border border-border/50 bg-white">
                             <img
                               src={certPreview(exp.certificateUrl)}
                               alt={`Certificate - ${exp.position}`}
                               className="w-full h-full object-cover"
                             />
                           </div>
-                          <div className="min-w-0">
+                          <div className="min-w-0 flex-1">
                             <p className="text-sm font-semibold text-text-primary group-hover/cert:text-accent transition-colors truncate">Certificate of {exp.position}</p>
-                            <p className="text-xs text-text-muted mt-0.5">{exp.organization}</p>
+                            <p className="text-xs text-text-muted mt-0.5 truncate">{exp.organization}</p>
                           </div>
                         </div>
                       </div>
