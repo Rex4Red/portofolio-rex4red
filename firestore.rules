@@ -2,30 +2,53 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Public read for all collections (portfolio is public)
+
+    // ====== Helpers ======
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid == 'cpO9O1Qzd6PBV4aH9chORaSJhbG2';
+    }
+
+    // ====== Public-read collections (write only by admin) ======
     match /profiles/{document=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
-    
+
     match /projects/{document=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
-    
+
     match /experiences/{document=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
-    
+
     match /certificates/{document=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
-    
-    match /settings/{document=**} {
+
+    // ====== Settings: visitor counter is public-incrementable, everything else admin-only ======
+    match /settings/{docId} {
       allow read: if true;
-      allow write: if true;  // visitor count needs public write
+
+      // Admin can write anything
+      allow write: if isAdmin();
+
+      // Anonymous visitors can ONLY increment visitorCount by exactly 1
+      // and cannot touch any other field on the document.
+      allow update: if
+        // Only the visitorCount field is being modified
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['visitorCount'])
+        // The new value is exactly old + 1
+        && request.resource.data.visitorCount == resource.data.visitorCount + 1;
+    }
+
+    // ====== Default deny for any other collection ======
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
