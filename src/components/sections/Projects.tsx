@@ -70,11 +70,15 @@ export function Projects() {
                 <div className="grid grid-cols-1 md:grid-cols-2">
                   {/* Thumbnail */}
                   <div className="h-64 md:h-auto bg-surface-2 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
-                      <span className="font-[family-name:var(--font-display)] text-6xl text-accent/20">
-                        {featured.title.charAt(0)}
-                      </span>
-                    </div>
+                    {featured.thumbnailUrl ? (
+                      <img src={featured.thumbnailUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
+                        <span className="font-[family-name:var(--font-display)] text-6xl text-accent/20">
+                          {featured.title.charAt(0)}
+                        </span>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       {featured.githubUrl && (
                         <a href={featured.githubUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
@@ -115,11 +119,15 @@ export function Projects() {
                 <div className="bg-surface-elevated bento-card rounded-2xl overflow-hidden group hover:border-accent/40 hover:scale-[1.02] transition-all duration-300 h-full flex flex-col">
                   {/* Thumbnail */}
                   <div className="h-48 bg-surface-2 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
-                      <span className="font-[family-name:var(--font-display)] text-5xl text-accent/15">
-                        {project.title.charAt(0)}
-                      </span>
-                    </div>
+                    {project.thumbnailUrl ? (
+                      <img src={project.thumbnailUrl} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
+                        <span className="font-[family-name:var(--font-display)] text-5xl text-accent/15">
+                          {project.title.charAt(0)}
+                        </span>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                       {project.githubUrl && (
                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30">
