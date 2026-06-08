@@ -71,7 +71,7 @@ export function Projects() {
                   {/* Thumbnail */}
                   <div className="h-64 md:h-auto bg-surface-2 relative overflow-hidden">
                     {featured.thumbnailUrl ? (
-                      <img src={featured.thumbnailUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-contain bg-surface-2 p-2" />
+                      <img src={featured.thumbnailUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-cover" />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
                         <span className="font-[family-name:var(--font-display)] text-6xl text-accent/20">
@@ -120,7 +120,7 @@ export function Projects() {
                   {/* Thumbnail */}
                   <div className="h-48 bg-surface-2 relative overflow-hidden">
                     {project.thumbnailUrl ? (
-                      <img src={project.thumbnailUrl} alt={project.title} className="absolute inset-0 w-full h-full object-contain bg-surface-2 p-2" />
+                      <img src={project.thumbnailUrl} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
                         <span className="font-[family-name:var(--font-display)] text-5xl text-accent/15">
