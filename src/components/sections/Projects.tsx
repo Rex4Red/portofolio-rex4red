@@ -69,9 +69,9 @@ export function Projects() {
               <div className="bg-surface-elevated bento-card rounded-2xl overflow-hidden mb-6 group hover:border-accent/40 transition-all duration-300">
                 <div className="grid grid-cols-1 md:grid-cols-2">
                   {/* Thumbnail */}
-                  <div className="aspect-video bg-surface-2 relative overflow-hidden">
+                  <div className="h-64 md:h-auto bg-surface-2 relative overflow-hidden">
                     {featured.thumbnailUrl ? (
-                      <img src={featured.thumbnailUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-cover" />
+                      <img src={featured.thumbnailUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-cover object-top" />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
                         <span className="font-[family-name:var(--font-display)] text-6xl text-accent/20">
